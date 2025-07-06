@@ -81,53 +81,11 @@ The notebook shows how to compute:
 
 These metrics help validate your models and datasets.
 
----
+## 👥 Contributors
 
-## 🛠️ Contributing
+This workshop was developed and maintained by:
 
-Pull requests and plugin ideas are welcome!
+* [Adonai Vera](https://github.com/AdonaiVera) 
+* [Paula Ramos](https://github.com/paularamo) 
 
----
-
-## 📝 License
-
-MIT License
-
-````
-
----
-
-## 📄 `requirements.txt`
-
-Here’s a clean list:
-
-```text
-fiftyone
-# For 3D/point cloud support
-fiftyone[3d]
-# (Optional) If you want Jupyter Lab
-jupyterlab
-````
-
----
-
-## 🪄 Quick Setup Script (Optional)
-
-If you prefer, you can also **copy-paste this script** to set everything up quickly:
-
-```bash
-# Clone repo
-git clone https://github.com/YOUR_USERNAME/fiftyone-researcher-playground.git
-cd fiftyone-researcher-playground
-
-# Create a virtual environment
-python -m venv venv
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Start Jupyter
-jupyter lab demo.ipynb
-```
-
+We welcome more contributors to extend support for new Research! 
