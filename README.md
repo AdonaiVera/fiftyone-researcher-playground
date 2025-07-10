@@ -2,6 +2,10 @@
 
 👋 *By researchers, for researchers.*
 
+[![FiftyOne Researcher Playground Slides](assets/slides.png)](https://docs.google.com/presentation/d/1XOwuwPqbgYyb6TmzFlZ6g6R4hLzbyzxQR6icpvlddrY/edit?usp=sharing)
+
+*Click the image above to view the presentation slides*
+
 This repository provides a hands-on Jupyter Notebook that demonstrates a **complete, research-grade computer vision workflow** using [FiftyOne](https://voxel51.com/fiftyone/). It is designed for transparency, reproducibility, and flexibility—empowering you to:
 
 - **Load and explore diverse datasets:** images, video, and point clouds
