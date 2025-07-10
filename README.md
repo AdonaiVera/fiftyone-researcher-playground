@@ -1,91 +1,90 @@
 # 🧠 FiftyOne Researcher Playground
+
 👋 *By researchers, for researchers.*
 
-This repository contains a Jupyter Notebook demonstrating how to:
+This repository provides a hands-on Jupyter Notebook that demonstrates a **complete, research-grade computer vision workflow** using [FiftyOne](https://voxel51.com/fiftyone/). It is designed for transparency, reproducibility, and flexibility—empowering you to:
 
-- Load diverse datasets: **images**, **video**, **point clouds**
-- Perform core machine learning tasks: **classification**, **object detection**
-- Integrate powerful plugins to:
-  - Detect image quality issues
-  - Find duplicate images
-  - Perform semantic document search
-  - Ask visual questions about your data
-  - Detect outliers
-  - Analyze sparse concepts and potential biases *(by Adonai)*
-  - Validate visual-language model (VLM) performance *(by Adonai)*
-  - Explore solutions with VoxelGPT *(by Adonai)*
-- Evaluate models with built-in metrics
+- **Load and explore diverse datasets:** images, video, and point clouds
+- **Perform core ML tasks:** classification, object detection, and more
+- **Visualize embeddings:** with UMAP and CLIP for interactive data exploration
+- **Benchmark models:** run and compare state-of-the-art detectors (Faster R-CNN, RT-DETR, YOLOv11n) on COCO and other datasets
+- **Evaluate with robust metrics:** precision, recall, F1-score, mAP, and per-class analysis
+- **Integrate powerful plugins:** for bias detection, VLM efficiency, VQA, outlier detection, and more
+- **Produce publication-ready outputs:** including LaTeX tables and detailed reports
 
-✅ Designed to help researchers improve dataset quality, measure model performance, and experiment with cutting-edge tools.
-
----
+✅ **Purpose:** Help researchers improve dataset quality, measure and compare model performance, and experiment with cutting-edge tools in a reproducible, extensible environment.
 
 ## 🚀 Getting Started
 
 ### 1️⃣ Clone the repository
 
 ```bash
-git clone https://github.com/AdonaiVera/fiftyone-researcher-to-researcher
+git clone https://github.com/AdonaiVera/fiftyone-researcher-playground
 cd fiftyone-researcher-playground
-````
+```
 
 ### 2️⃣ Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
+Or, install directly from the notebook cells for the latest plugin versions.
 
----
 
-## 📓 Notebook
+## 📓 Usage
 
 Open the notebook:
 
 ```bash
-jupyter lab fiftyone_researcher_playground.ipynb
+jupyter lab demo.ipynb
 ```
-
 or
-
 ```bash
-jupyter notebook fiftyone_researcher_playground.ipynb
+jupyter notebook demo.ipynb
 ```
 
-Run each cell step by step.
+Run each cell step by step. The notebook is modular—feel free to skip to the sections most relevant to your research.
 
----
 
-## 🧩 Plugins Included
+## 🧩 Plugins & Integrations
 
-This project demonstrates the following plugins:
+This project demonstrates advanced research plugins, including:
 
-* Image Quality Issues
-* Image Deduplication
-* Semantic Document Search
-* Visual Question Answering
-* Outlier Detection
-* Sparse Concepts *(Find Bias)*
-* Validate VLM Efficiency *(Very cool)*
-* VoxelGPT *(Advanced querying)*
+- **Sparse Concepts (SpLiCE):** Find dataset biases and decompose core concepts
+- **Visual Question Answering (Janus Pro VQA):** Ask questions about your data
+- **Validate VLM Efficiency:** Analyze visual-language model performance
 
-> **Tip:** Activate plugins from the FiftyOne App sidebar after launching a session.
+## 🎯 Model Evaluation & Research Outputs
 
----
+The notebook shows how to:
 
-## 🎯 Evaluation Metrics
+- Apply multiple detection models to the same dataset
+- Compute and compare metrics: **accuracy, precision, recall, F1-score, mAP**
+- Generate per-class and aggregate reports
+- Produce LaTeX tables for direct inclusion in research papers
 
-The notebook shows how to compute:
+## 📈 Example Research Workflow
 
-* **Classification Accuracy**
-* **Detection mAP**
-
-These metrics help validate your models and datasets.
+1. **Load datasets** (images, video, point clouds, Hugging Face Hub)
+2. **Visualize and explore** with embeddings and interactive dashboards
+3. **Apply and compare models** (Faster R-CNN, RT-DETR, YOLOv11n)
+4. **Evaluate results** with robust metrics and ablation studies
+5. **Integrate plugins** for bias, quality, and advanced analysis
+6. **Export results** for publication or further research
 
 ## 👥 Contributors
 
 This workshop was developed and maintained by:
 
-* [Adonai Vera](https://github.com/AdonaiVera) 
-* [Paula Ramos](https://github.com/paularamo) 
+- [Adonai Vera](https://github.com/AdonaiVera) 
+- [Paula Ramos](https://github.com/paularamo) 
+
+We welcome more contributors! If you have ideas for new plugins, research workflows, or improvements, please open an issue or pull request.
+
+## 💬 Community & Support
+
+- [FiftyOne Documentation](https://docs.voxel51.com/)
+- [FiftyOne Discord Community](https://community.voxel51.com/)
+- [Voxel51 GitHub](https://github.com/voxel51/fiftyone)
 
 We welcome more contributors to extend support for new Research! 
