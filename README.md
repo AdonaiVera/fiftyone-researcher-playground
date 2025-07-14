@@ -4,6 +4,8 @@
 
 [![FiftyOne Researcher Playground Slides](assets/slides.png)](https://link.voxel51.com/by-for-researchers)
 
+
+
 *Click the image above to view the presentation slides*
 
 This repository provides a hands-on Jupyter Notebook that demonstrates a **complete, research-grade computer vision workflow** using [FiftyOne](https://voxel51.com/fiftyone/). It is designed for transparency, reproducibility, and flexibility—empowering you to:
@@ -51,6 +53,9 @@ Run each cell step by step. The notebook is modular—feel free to skip to the s
 
 
 ## 🧩 Plugins & Integrations
+
+[![FiftyOne Researcher Playground link](assets/researchers.png)](https://link.voxel51.com/integrate-with-fiftyone)
+
 
 This project demonstrates advanced research plugins, including:
 
