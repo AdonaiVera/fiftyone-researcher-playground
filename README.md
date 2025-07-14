@@ -2,7 +2,7 @@
 
 👋 *By researchers, for researchers.*
 
-[![FiftyOne Researcher Playground Slides](assets/slides.png)](https://docs.google.com/presentation/d/1XOwuwPqbgYyb6TmzFlZ6g6R4hLzbyzxQR6icpvlddrY/edit?usp=sharing)
+[![FiftyOne Researcher Playground Slides](assets/slides.png)](https://link.voxel51.com/by-for-researchers)
 
 *Click the image above to view the presentation slides*
 
