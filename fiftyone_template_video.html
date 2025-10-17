@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FiftyOne Terminal Commands</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0d1117;
+            color: #c9d1d9;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .terminal-container {
+            width: 90%;
+            max-width: 900px;
+            background: #0d1117;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+        }
+
+        .terminal-header {
+            background: #21262d;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #30363d;
+        }
+
+        .terminal-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .dot.red { background: #ff5f56; }
+        .dot.yellow { background: #ffbd2e; }
+        .dot.green { background: #27ca3f; }
+
+        .terminal-title {
+            margin-left: 15px;
+            color: #8b949e;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .terminal-body {
+            background: #0d1117;
+            padding: 20px;
+            height: 500px;
+            overflow-y: auto;
+            font-size: 14px;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .command-line {
+            margin: 12px 0;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .command-line.tight {
+            margin: 1px 0;
+        }
+         .command-line.medium {
+            margin: 5px 0;
+        }
+
+        .prompt {
+            color: #7c3aed;
+            margin-right: 8px;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .python-prompt {
+            color: #f59e0b;
+        }
+
+        .command {
+            color: #c9d1d9;
+            flex: 1;
+            word-break: break-all;
+            white-space: pre;
+        }
+
+        .output {
+            color: #8b949e;
+            margin: 8px 0 16px 0;
+            white-space: pre-wrap;
+            padding-left: 20px;
+            border-left: 2px solid #21262d;
+        }
+
+        .success-output {
+            color: #56d364;
+        }
+
+        .install-output {
+            color: #79c0ff;
+        }
+
+        .python-info {
+            color: #ffa657;
+        }
+
+        .cursor {
+            background: #7c3aed;
+            animation: blink 1s infinite;
+            width: 2px;
+            height: 16px;
+            display: inline-block;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .controls {
+            background: #21262d;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            border-top: 1px solid #30363d;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            background: #21262d;
+            color: #c9d1d9;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn:hover {
+            background: #30363d;
+            border-color: #8b949e;
+        }
+
+        .btn.primary {
+            background: #238636;
+            border-color: #238636;
+            color: white;
+        }
+
+        .btn.primary:hover {
+            background: #2ea043;
+            border-color: #2ea043;
+        }
+
+        .progress-container {
+            background: #21262d;
+            padding: 8px 20px;
+            border-top: 1px solid #30363d;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 3px;
+            background: #30363d;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7c3aed, #a855f7);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* Custom scrollbar for webkit browsers */
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: #0d1117;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #21262d;
+            border-radius: 4px;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb:hover {
+            background: #30363d;
+        }
+    </style>
+</head>
+<body>
+    <div class="terminal-container">
+        <div class="terminal-header">
+            <div class="terminal-dots">
+                <div class="dot red"></div>
+                <div class="dot yellow"></div>
+                <div class="dot green"></div>
+            </div>
+            <div class="terminal-title">Create and Save a FiftyOne Dataset View</div>
+        </div>
+        
+        <div class="terminal-body" id="terminal-body">
+            <!-- Commands will be inserted here -->
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn primary" id="playBtn">▶ Play</button>
+            <button class="btn" id="pauseBtn">⏸ Pause</button>
+            <button class="btn" id="resetBtn">↻ Reset</button>
+            <button class="btn" id="speedBtn">1x Speed</button>
+        </div>
+    </div>
+
+    <script>
+        class TerminalPlayer {
+            constructor() {
+                this.currentStep = 0;
+                this.isPlaying = false;
+                this.isPaused = false;
+                this.speed = 1;
+                this.typeSpeed = 9;
+                
+                this.commands = [
+                    {
+                        prompt: "(env) $ ",
+                        command: "python3",
+                        output: null,
+                        outputClass: "python-info",
+                        delay: 1000
+                    },
+                    {
+                        prompt: ">>> ",
+                        command: "import fiftyone as fo",
+                        output: null,
+                        tight: true,
+                        delay: 0
+                    },
+                    {
+                        prompt: "     ",
+                        command: "   import fiftyone.zoo as foz",
+                        output: null,
+                        tight: true,
+                        delay: 0
+                    },
+                    {
+                        prompt: "     ",
+                        command: "   from fiftyone import ViewField as F",
+                        output: null,
+                        tight: true,
+                        delay: 1500
+                    },
+                    {
+                        prompt: ">>> ",
+                        command: 'dataset = foz.load_zoo_dataset("quickstart")',
+                        output: `Downloading dataset 'quickstart'...
+Downloading samples to '/Users/user/fiftyone/quickstart/data'
+100%|████████████████████████████████████| 200/200 [00:15<00:00, 13.2it/s]
+Dataset 'quickstart' created`,
+                        outputClass: "success-output",
+                        delay: 1500
+                    },
+                    {
+                        prompt: ">>> ",
+                        command: "dataset.persistent = True",
+                        output: null,
+                        delay: 1000
+                    },
+                    {
+                        prompt: ">>> # Create a View",
+                        command: ' ',
+                        output: null,
+                        tight: true,
+                        delay: 0
+                    },
+                    {
+                        prompt: "     ",
+                        command: "    cats_view = (",
+                        output: null,
+                        delay: 0,
+                        tight: true
+                    },
+                    {
+                        prompt: "          ",
+                        command: '          dataset',
+                        output: null,
+                        delay: 0,
+                        tight: true
+                    },
+                    {
+                        prompt: "          ",
+                        command: '          .select_fields("ground_truth")',
+                        output: null,
+                        delay: 0,
+                        tight: true
+                    },
+                    {
+                        prompt: "          ",
+                        command: '          .filter_labels("ground_truth", F("label") == "cat")',
+                        output: null,
+                        delay: 0,
+                        tight: true
+                    },
+                    {
+                        prompt: "          ",
+                        command: '          .sort_by(F("ground_truth.detections").length(), reverse=True)',
+                        output: null,
+                        delay: 0,
+                        tight: true
+                    },
+                    {
+                        prompt: "     ",
+                        command: '     )',
+                        output: null,
+                        delay: 1500,
+                    },
+                    {
+                        prompt: ">>> # Save the view",
+                        command: ' ',
+                        output: null,
+                        tight: true,
+                        delay: 0
+                    },
+                    {
+                        prompt: "     ",
+                        command: '    dataset.save_view("cats-view", cats_view)',
+                        output: null,
+                        tight: true,
+                        delay: 1500
+                    },
+                    {
+                        prompt: ">>> # View the cats_view Dataset View in the FiftyOne App",
+                        command: ' ',
+                        output: null,
+                        tight: true,
+                        delay: 0
+                    },
+                    {
+                        prompt: "     ",
+                        command: "    session = fo.launch_app(dataset)",
+                        tight: true,
+                        output: `App launched at http://localhost:5151
+🎉 Open your browser to view the dataset!`,
+                        outputClass: "success-output",
+                        delay: 3000
+                    }
+                ];
+
+                this.initializeControls();
+            }
+
+            initializeControls() {
+                document.getElementById('playBtn').addEventListener('click', () => this.togglePlay());
+                document.getElementById('pauseBtn').addEventListener('click', () => this.pause());
+                document.getElementById('resetBtn').addEventListener('click', () => this.reset());
+                document.getElementById('speedBtn').addEventListener('click', () => this.changeSpeed());
+            }
+
+            async togglePlay() {
+                if (this.isPlaying) {
+                    this.pause();
+                    return;
+                }
+
+                if (this.isPaused) {
+                    this.isPaused = false;
+                    document.getElementById('playBtn').textContent = '⏸ Pause';
+                    return;
+                }
+
+                this.isPlaying = true;
+                document.getElementById('playBtn').textContent = '⏸ Pause';
+
+                for (; this.currentStep < this.commands.length; this.currentStep++) {
+                    if (!this.isPlaying) break;
+
+                    await this.executeCommand(this.commands[this.currentStep]);
+                    this.updateProgress();
+
+                    while (this.isPaused && this.isPlaying) {
+                        await new Promise(resolve => setTimeout(resolve, 100));
+                    }
+                }
+
+                if (this.isPlaying) {
+                    document.getElementById('playBtn').textContent = '✅ Complete';
+                    this.isPlaying = false;
+                }
+            }
+
+            async executeCommand(cmd) {
+                const terminalBody = document.getElementById('terminal-body');
+                
+                // Create command line
+                const commandLine = document.createElement('div');
+                commandLine.className = cmd.tight ? 'command-line tight' : 'command-line';
+                
+                const prompt = document.createElement('span');
+                prompt.className = cmd.prompt.includes('>>>') ? 'prompt python-prompt' : 'prompt';
+                prompt.textContent = cmd.prompt;
+                
+                const command = document.createElement('span');
+                command.className = 'command';
+                
+                commandLine.appendChild(prompt);
+                commandLine.appendChild(command);
+                terminalBody.appendChild(commandLine);
+                
+                // Type command
+                await this.typeText(command, cmd.command);
+                
+                // Add output if exists
+                if (cmd.output) {
+                    const output = document.createElement('div');
+                    output.className = `output ${cmd.outputClass || ''}`;
+                    output.textContent = cmd.output;
+                    terminalBody.appendChild(output);
+                }
+                
+                // Scroll to bottom
+                terminalBody.scrollTop = terminalBody.scrollHeight;
+                
+                // Wait before next command
+                await new Promise(resolve => setTimeout(resolve, cmd.delay / this.speed));
+            }
+
+            async typeText(element, text) {
+                for (let i = 0; i < text.length; i++) {
+                    if (!this.isPlaying || this.isPaused) {
+                        while (this.isPaused && this.isPlaying) {
+                            await new Promise(resolve => setTimeout(resolve, 100));
+                        }
+                        if (!this.isPlaying) break;
+                    }
+                    
+                    element.textContent += text[i];
+                    await new Promise(resolve => setTimeout(resolve, this.typeSpeed / this.speed));
+                }
+            }
+
+            pause() {
+                if (this.isPlaying) {
+                    this.isPaused = !this.isPaused;
+                    document.getElementById('playBtn').textContent = this.isPaused ? '▶ Resume' : '⏸ Pause';
+                }
+            }
+
+            reset() {
+                this.isPlaying = false;
+                this.isPaused = false;
+                this.currentStep = 0;
+                
+                document.getElementById('terminal-body').innerHTML = '';
+                document.getElementById('playBtn').textContent = '▶ Play';
+                document.getElementById('progress').style.width = '0%';
+            }
+
+            changeSpeed() {
+                const speeds = [0.5, 1, 1.5, 2];
+                const currentIndex = speeds.indexOf(this.speed);
+                this.speed = speeds[(currentIndex + 1) % speeds.length];
+                document.getElementById('speedBtn').textContent = `${this.speed}x Speed`;
+            }
+
+            updateProgress() {
+                const progress = ((this.currentStep + 1) / this.commands.length) * 100;
+                document.getElementById('progress').style.width = progress + '%';
+            }
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new TerminalPlayer();
+        });
+    </script>
+</body>
+</html>
